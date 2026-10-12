@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter une remarque{% endblock %}
+
+{% block body %}
+    <h1 class="mb-4">📝 Ajouter une remarque à l'intervention #{{ intervention.id }}</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-primary mt-3">Enregistrer la remarque</button>
+    {{ form_end(form) }}
+
+    <div class="mt-3">
+        <a href="{{ path('app_intervention_show', {'id': intervention.id}) }}" class="btn btn-secondary">
+            ← Retour à l'intervention
+        </a>
+    </div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle compétence{% endblock %}
+
+{% block body %}
+    <h1 class="mb-4">➕ Ajouter une nouvelle compétence</h1>
+
+    {{ include('skill/_form.html.twig') }}
+
+    <div class="mt-3">
+        <a href="{{ path('app_skill_index') }}" class="btn btn-secondary">← Retour à la liste</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard Administrateur{% endblock %}
+
+{% block body %}
+    <h1 class="mb-4">👑 Bienvenue {{ app.user.FirstName }} sur le Dashboard Administrateur</h1>
+
+    <p>Vous êtes connecté avec les rôles :
+        {% for role in app.user.roles %}
+            <span class="badge bg-primary">{{ role }}</span>
+        {% endfor %}
+    </p>
+
+    <p class="text-muted">Utilisez le menu en haut pour accéder aux fonctionnalités.</p>
+{% endblock %}

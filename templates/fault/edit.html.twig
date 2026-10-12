@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier la panne{% endblock %}
+
+{% block body %}
+    <h1 class="mb-4">✏️ Modifier une panne</h1>
+
+    {{ include('fault/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+    <div class="mt-3">
+        <a href="{{ path('app_fault_index') }}" class="btn btn-secondary">← Retour à la liste</a>
+        {{ include('fault/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

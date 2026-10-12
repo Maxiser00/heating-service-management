@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier une compétence{% endblock %}
+
+{% block body %}
+    <h1 class="mb-4">✏️ Modifier une compétence</h1>
+
+    {{ include('skill/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+    <div class="mt-3">
+        <a href="{{ path('app_skill_index') }}" class="btn btn-secondary">← Retour à la liste</a>
+        {{ include('skill/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

@@ -1,0 +1,59 @@
+{{ form_start(form) }}
+
+<div class="form-group">
+    {{ form_label(form.Wording, 'Nom de l\'intervention') }}
+    {{ form_widget(form.Wording, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.Wording) }}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.Timestamp, 'Date') }}
+    {{ form_widget(form.Timestamp, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.Timestamp) }}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.Description, 'Description') }}
+    {{ form_widget(form.Description, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.Description) }}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.Address, 'Adresse') }}
+    {{ form_widget(form.Address, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.Address) }}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.Status, 'Statut') }}
+    {{ form_widget(form.Status, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.Status) }}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.fault, 'Panne') }}
+    {{ form_widget(form.fault, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.fault) }}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.user, 'Chauffagiste assigné') }}
+    {{ form_widget(form.user, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.user) }}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.vehicle, 'Véhicule') }}
+    {{ form_widget(form.vehicle, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.vehicle) }}
+</div>
+
+<div class="form-group">
+    {{ form_label(form.stocks, 'Pièces utilisées') }}
+    {{ form_widget(form.stocks, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.stocks) }}
+</div>
+
+<button class="btn btn-primary mt-4">{{ button_label|default('Enregistrer') }}</button>
+
+{{ form_end(form) }}

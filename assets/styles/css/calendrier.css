@@ -1,0 +1,81 @@
+:root {
+    --sidebar-color: #93A8A8;
+    --main-bg-color: #C0D6CE;
+    --header-bg-color: #93A8A8;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+
+}
+
+.sidebar {
+    background-color: var(--sidebar-color);
+    width: 10%;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    gap: 1%;
+    font-size: 20px;
+    color: azure;
+
+}
+
+.main-content {
+    flex: 1;
+    background-color: var(--main-bg-color);
+    min-height: 100vh;
+
+
+}
+
+.calendar-header {
+    background-color: var(--header-bg-color);
+    padding: 1%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+}
+
+.day-header {
+    width: 9%;
+    text-align: center;
+    font-size: 25px;
+}
+
+.sidebar-button {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+
+}
+
+.calendar-title {
+    font-size: clamp(24px, 5vw, 48px);
+    text-align: center;
+    margin-top: 10%;
+}
+
+.logoEmail{
+    width: 50%;
+
+
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 15%;
+        padding: 1%;
+    }
+
+    .day-header {
+        font-size: 18px;
+        width: 12%;
+    }
+}
+

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des pièces détachées{% endblock %}
+
+{% block body %}
+    <h1 class="mb-4">📦 Pièces détachées disponibles</h1>
+
+    <table class="table table-striped table-bordered align-middle">
+        <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Quantité</th>
+            <th class="text-center">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for stock in stocks %}
+            <tr>
+                <td>{{ stock.id }}</td>
+                <td>{{ stock.Wording }}</td>
+                <td>{{ stock.Description }}</td>
+                <td>{{ stock.Quantity }}</td>
+                <td class="text-center">
+                    <a href="{{ path('app_stock_show', {'id': stock.id}) }}" class="btn btn-info btn-sm">👁️ Voir</a>
+                    <a href="{{ path('app_stock_edit', {'id': stock.id}) }}" class="btn btn-warning btn-sm">✏️ Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5" class="text-center text-muted">Aucune pièce en stock.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_stock_new') }}" class="btn btn-success mt-3">➕ Ajouter une pièce</a>
+{% endblock %}

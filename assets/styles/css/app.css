@@ -1,0 +1,7 @@
+body {
+    background: url("../image/fond.png") center center / cover no-repeat !important;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+

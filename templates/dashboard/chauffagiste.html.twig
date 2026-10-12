@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard Chauffagiste{% endblock %}
+
+{% block body %}
+    <h1 class="mb-4">🔧 Bonjour {{ app.user.FirstName }}, bienvenue sur ton espace</h1>
+
+    <p>Rôle :
+        {% for role in app.user.roles %}
+            <span class="badge bg-success">{{ role }}</span>
+        {% endfor %}
+    </p>
+
+    <p class="text-muted">Retrouvez votre planning, vos interventions et vos outils dans le menu ci-dessus.</p>
+{% endblock %}

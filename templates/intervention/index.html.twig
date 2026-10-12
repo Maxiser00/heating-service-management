@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des interventions{% endblock %}
+
+{% block body %}
+    <h1>Liste des interventions</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Chauffagiste</th>
+            <th>Véhicule</th>
+            <th>Panne</th>
+            <th>Date & Heure</th>
+            <th>Statut</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for intervention in interventions %}
+            <tr>
+                <td>{{ intervention.id }}</td>
+                <td>{{ intervention.Wording }}</td>
+                <td>
+                    {{ intervention.user ? intervention.user.FirstName ~ ' ' ~ intervention.user.LastName : 'Non assigné' }}
+                </td>
+                <td>
+                    {{ intervention.vehicle ? intervention.vehicle.LicensePlate : 'Aucun véhicule' }}
+                </td>
+                <td>
+                    {{ intervention.fault ? intervention.fault.Wording : 'Non précisé' }}
+                </td>
+                <td>
+                    {{ intervention.Timestamp ? intervention.Timestamp|date('Y-m-d H:i') : '' }}
+                </td>
+                <td>{{ intervention.Status }}</td>
+                <td>
+                    <a href="{{ path('app_intervention_show', {'id': intervention.id}) }}" class="btn btn-info btn-sm">Voir</a>
+                    <a href="{{ path('app_intervention_edit', {'id': intervention.id}) }}" class="btn btn-secondary btn-sm">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">Aucune intervention trouvée</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_intervention_new') }}" class="btn btn-success">Créer une nouvelle intervention</a>
+
+    <div class="mt-3">
+        <a href="{{ path('app_calendrier_index') }}" class="btn btn-secondary">← Retour au calendrier</a>
+    </div>
+{% endblock %}

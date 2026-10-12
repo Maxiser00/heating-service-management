@@ -1,0 +1,64 @@
+# Symfony & PHP
+/vendor/
+/var/
+/.env.local
+.env.*.local
+.env.test.local
+/phpunit.xml
+/.phpunit.result.cache
+
+# Cache & logs
+/var/cache/
+/var/log/
+/var/data/
+
+# IDEs
+/.idea/
+/*.sublime-project
+/*.sublime-workspace
+/.vscode/
+/*.code-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Symfony Encore / Webpack / Assets
+/node_modules/
+/public/build/
+/public/bundles/
+/assets/build/
+
+# PHPUnit
+.phpunit.result.cache
+.phpunit.cache/
+
+# Coverage reports
+coverage/
+
+# PHPMD, PHP-CS-Fixer, PHPStan, Psalm
+.php_cs.cache
+.php-cs-fixer.cache
+phpstan-result.cache
+psalm.xml
+psalm.cache
+
+# Docker
+/docker-compose.override.yml
+.docker/
+
+# Misc
+*.log
+*.cache
+*.swp
+*.bak
+*.tmp
+*.orig
+
+# Database
+*.sqlite
+*.sqlite3
+/data/*.sqlite
+
+# Translations
+/translations/*.catalogue.php

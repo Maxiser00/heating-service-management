@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des pannes{% endblock %}
+
+{% block body %}
+    <h1 class="mb-4">📋 Liste des pannes enregistrées</h1>
+
+    <table class="table table-striped table-bordered align-middle">
+        <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Description</th>
+            <th class="text-center">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for fault in faults %}
+            <tr>
+                <td>{{ fault.id }}</td>
+                <td>{{ fault.Wording }}</td>
+                <td>{{ fault.Description }}</td>
+                <td class="text-center">
+                    <a href="{{ path('app_fault_show', {'id': fault.id}) }}" class="btn btn-sm btn-info">👁️ Voir</a>
+                    <a href="{{ path('app_fault_edit', {'id': fault.id}) }}" class="btn btn-sm btn-warning">✏️ Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4" class="text-center text-muted">Aucune panne trouvée.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_fault_new') }}" class="btn btn-success mt-3">➕ Ajouter une nouvelle panne</a>
+{% endblock %}

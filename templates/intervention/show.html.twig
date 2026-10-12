@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Intervention{% endblock %}
+
+{% block body %}
+    <h1>Détails de l'Intervention</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ intervention.id }}</td>
+        </tr>
+        <tr>
+            <th>Nom de l'intervention</th>
+            <td>{{ intervention.Wording }}</td>
+        </tr>
+        <tr>
+            <th>Date & Heure</th>
+            <td>{{ intervention.Timestamp ? intervention.Timestamp|date('Y-m-d H:i') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ intervention.Description }}</td>
+        </tr>
+        <tr>
+            <th>Adresse</th>
+            <td>{{ intervention.Address }}</td>
+        </tr>
+        <tr>
+            <th>Statut</th>
+            <td>{{ intervention.Status }}</td>
+        </tr>
+        <tr>
+            <th>Chauffagiste</th>
+            <td>
+                {{ intervention.user ? intervention.user.FirstName ~ ' ' ~ intervention.user.LastName : 'Non assigné' }}
+            </td>
+        </tr>
+        <tr>
+            <th>Panne</th>
+            <td>
+                {{ intervention.fault ? intervention.fault.Wording : 'Non précisé' }}
+            </td>
+        </tr>
+        <tr>
+            <th>Véhicule</th>
+            <td>
+                {{ intervention.vehicle ? intervention.vehicle.LicensePlate : 'Aucun véhicule associé' }}
+            </td>
+        </tr>
+        <tr>
+            <th>Pièces détachées utilisées</th>
+            <td>
+                {% if intervention.stocks|length > 0 %}
+                    <ul>
+                        {% for stock in intervention.stocks %}
+                            <li>{{ stock.Wording }} (Quantité: {{ stock.Quantity }})</li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    Aucune pièce utilisée
+                {% endif %}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    {% if is_granted('ROLE_CHAUFFAGISTE') and intervention.user == app.user %}
+        <a href="{{ path('app_intervention_remarque', {'id': intervention.id}) }}" class="btn btn-outline-primary">
+            📝 Ajouter une remarque
+        </a>
+    {% endif %}
+    <a href="{{ path('app_intervention_index') }}" class="btn btn-primary">Retour à la liste</a>
+    <a href="{{ path('app_intervention_edit', {'id': intervention.id}) }}" class="btn btn-warning">Modifier</a>
+
+    {{ include('intervention/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle pièce détachée{% endblock %}
+
+{% block body %}
+    <h1 class="mb-4">➕ Ajouter une nouvelle pièce</h1>
+
+    {{ include('stock/_form.html.twig') }}
+
+    <div class="mt-3">
+        <a href="{{ path('app_stock_index') }}" class="btn btn-secondary">← Retour à la liste</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,176 @@
+body {
+    background: #A6CD9E !important;
+}
+
+
+.background {
+    background-color: #7D9599;
+    position: absolute;
+    width: 23%;
+    height: 100%;
+}
+.background-intervention {
+    background-color: #7D9599;
+    position: absolute;
+    box-shadow: 0 0 8px 0 black;
+
+    margin: 7% 0 0 26.5%;
+    width: 70%;
+    height: 70%;
+}
+
+
+.logoCalendar {
+    position: absolute;
+    margin: 5% 0 0 2%;
+    width: 4.5%;
+}
+.intervention {
+    position: absolute;
+    margin: 10.5% 0 0 2%;
+    font-size: 175%;
+    width: 50%;
+    color: white;
+}
+.logoChauffagiste {
+    position: absolute;
+    margin: 15% 0 0 2%;
+    width: 4.5%;
+}
+.chauffagiste {
+    position: absolute;
+    margin: 20% 0 0 2%;
+    font-size: 175%;
+    width: 20%;
+    color: white;
+}
+.logoModifier {
+    position: absolute;
+    margin: 25% 0 0 2%;
+    width: 4.5%;
+}
+.modifier {
+    position: absolute;
+    margin: 30% 0 0 2%;
+    font-size: 175%;
+    width: 20%;
+    color: white;
+}
+.logoHegre {
+    position: absolute;
+    margin: 41% 0 0 0;
+    width: 10%;
+}
+
+
+
+#nom {
+    position: absolute;
+    margin: 2% 0 0 5%;
+    font-size: 160%;
+    width: 90%;
+    height: 10%;
+}
+
+
+#adresse {
+    position: absolute;
+    margin: 10% 0 0 3%;
+    width: 65%;
+}
+
+
+#pannes {
+    position: absolute;
+    margin: 15% 0 0 3%;
+    width: 65%;
+}
+
+#employesCompetences {
+    position: absolute;
+    margin: 20% 0 0 3%;
+    width: 65%;
+}
+
+#piece {
+    position: absolute;
+    margin: 25% 0 0 3%;
+    width: 65%;
+}
+
+
+#vehicule {
+    position: absolute;
+    margin: 30% 0 0 3%;
+    width: 20%;
+    height: 5%;
+
+    text-align: center;
+    background-color: white;
+}
+#oui {
+    position: absolute;
+    margin: 30.7% 0 0 25%;
+}
+#oui p {
+    position: absolute;
+    margin: 30.3% 0 0 27%;
+}
+#non {
+    position: absolute;
+    margin: 30.7% 0 0 32%;
+}
+#non p {
+    position: absolute;
+    margin: 30.3% 0 0 34%;
+}
+
+
+#description {
+    position: absolute;
+    margin: 35% 0 0 3%;
+    width: 40%;
+    height: 25%;
+}
+#liste {
+    position: absolute;
+    margin: 45% 0 0 44%;
+}
+
+#date {
+    position: absolute;
+    margin: 10% 0 0 75%;
+    width: 20%;
+    height: 5%;
+
+    text-align: center;
+    border-radius: 3%;
+    background-color: white;
+}
+#calendar {
+    position: absolute;
+    margin: 15% 0 0 75%;
+}
+
+
+
+
+
+.applique {
+    position: absolute;
+    margin: 40% 0 0 80%;
+    width: 15%;
+    height: 15%;
+
+    border-radius: 3%;
+    background-color: white;
+}
+.supprimer {
+    position: absolute;
+    margin: 40% 0 0 62%;
+    width: 15%;
+    height: 15%;
+
+    border-radius: 3%;
+    background-color: white;
+}

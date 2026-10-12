@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes interventions{% endblock %}
+
+{% block body %}
+    <h1>📋 Mes interventions</h1>
+
+    {% if interventions is not empty %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Adresse</th>
+                <th>Statut</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for intervention in interventions %}
+                <tr>
+                    <td>{{ intervention.Timestamp ? intervention.Timestamp|date('d/m/Y H:i') : '' }}</td>
+                    <td>{{ intervention.Description }}</td>
+                    <td>{{ intervention.Address }}</td>
+                    <td>{{ intervention.Status }}</td>
+                    <td>
+                        <a href="{{ path('app_intervention_show', {'id': intervention.id}) }}" class="btn btn-primary btn-sm">
+                            Voir
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Vous n’avez aucune intervention assignée.</p>
+    {% endif %}
+{% endblock %}

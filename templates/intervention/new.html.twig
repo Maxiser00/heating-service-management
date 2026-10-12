@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle intervention{% endblock %}
+
+{% block body %}
+    <h1 class="mb-4">➕ Créer une nouvelle intervention</h1>
+
+    <div class="background-intervention">
+        {{ include('intervention/_form.html.twig') }}
+    </div>
+{% endblock %}

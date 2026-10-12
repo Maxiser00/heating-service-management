@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Mon App Symfony{% endblock %}</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            background-color: #222;
+            color: white;
+            padding: 1rem;
+        }
+
+        .user-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav {
+            background-color: #eee;
+            padding: 1rem;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 0;
+        }
+
+        nav li a {
+            text-decoration: none;
+            color: #0077cc;
+            font-weight: bold;
+        }
+
+        nav li a:hover {
+            text-decoration: underline;
+        }
+
+        .content {
+            padding: 2rem;
+        }
+
+        .role-badge {
+            background: #ddd;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            margin-right: 0.3rem;
+            font-size: 0.85em;
+        }
+
+        .logout-btn {
+            background: transparent;
+            color: white;
+            border: 1px solid white;
+            padding: 0.3rem 0.8rem;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        .logout-btn:hover {
+            background-color: white;
+            color: #222;
+        }
+    </style>
+    {% block stylesheets %}{% endblock %}
+
+    <!-- FullCalendar pour faire un calendrier dynamique -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+</head>
+<body>
+
+{% if app.user %}
+    <header>
+        <div class="user-info">
+            <div>
+                <strong>Connecté en tant que</strong> {{ app.user.email }}<br>
+            </div>
+            <a href="{{ path('app_logout') }}" class="logout-btn">Déconnexion</a>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            {% if is_granted('ROLE_ADMIN') %}
+                <li><a href="{{ path('admin_dashboard') }}">Dashboard Admin</a></li>
+                <li><a href="{{ path('app_intervention_index') }}">Gérer les interventions</a></li>
+                <li><a href="{{ path('app_user_index') }}">Gérer les utilisateurs</a></li>
+                <li><a href="{{ path('app_vehicle_index') }}">Gérer les véhicules</a></li>
+                <li><a href="{{ path('app_stock_index') }}">Gérer les stocks</a></li>
+                <li><a href="{{ path('app_fault_index') }}">Gérer les pannes</a></li>
+                <li><a href="{{ path('app_skill_index') }}">Gérer les compétences</a></li>
+                <li><a href="{{ path('app_calendrier_index') }}">Tous les plannings</a></li>
+            {% endif %}
+
+            {% if is_granted('ROLE_SECRETAIRE') %}
+                <li><a href="{{ path('secretaire_dashboard') }}">Dashboard Secrétaire</a></li>
+                <li><a href="{{ path('app_intervention_index') }}">Gérer les interventions</a></li>
+                <li><a href="{{ path('app_vehicle_index') }}">Gérer les véhicules</a></li>
+                <li><a href="{{ path('app_stock_index') }}">Gérer les stocks</a></li>
+                <li><a href="{{ path('app_fault_index') }}">Gérer les pannes</a></li>
+                <li><a href="{{ path('app_skill_index') }}">Gérer les compétences</a></li>
+                <li><a href="{{ path('app_calendrier_indexSecretaire') }}">Plannings chauffagistes</a></li>
+            {% endif %}
+
+            {% if is_granted('ROLE_CHAUFFAGISTE') %}
+                <li><a href="{{ path('chauffagiste_dashboard') }}">Dashboard Chauffagiste</a></li>
+                <li><a href="{{ path('app_intervention_mes') }}">Mes interventions</a></li>
+                <li><a href="{{ path('app_calendrier_indexChauffagiste') }}">Mon planning</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}
+
+<div class="content">
+    {% block body %}{% endblock %}
+</div>
+
+{% block javascripts %}{% endblock %}
+</body>
+</html>
