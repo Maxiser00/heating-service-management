@@ -1,99 +1,180 @@
-# 🚀 Application de Gestion Chauffagiste
 
-## Description
-Cette application permet de gérer les interventions, les utilisateurs (chauffagistes, secrétaires, admins), les pièces détachées, les véhicules, et les plannings dans une entreprise de chauffagistes.
+# Heating Service Management System
 
----
+A web application designed to centralize and streamline daily operations in a heating and maintenance services company.
 
-## Fonctionnalités principales
-- **Gestion des utilisateurs** : création de chauffagistes, secrétaires, et admins avec des rôles spécifiques.
-- **Gestion des interventions** : assignation des chauffagistes, véhicules, pièces détachées, ajout de remarques.
-- **Gestion des stocks et des véhicules** : CRUD complet pour les pièces détachées et les véhicules.
-- **Planning des interventions** : chaque rôle accède à un planning personnalisé (chauffagiste, secrétaire, admin).
-- **Sécurisation par rôles** : accès aux pages limité par rôle (Admin, Secrétaire, Chauffagiste).
+Originally developed as a collaborative academic project during the **BTS SIO SLAM** program, this application provides tools for managing service interventions, employees, schedules, spare parts, and company vehicles.
 
----
+The system features role-based access control and dedicated interfaces for administrators, secretaries, and technicians.
 
-## Fonctionnalités avancées
-- ✅ **Contrôle d’unicité** : interdiction de double-assignation d’un même chauffagiste ou véhicule sur une même date/heure.
-- ✅ **Calendrier FullCalendar dynamique** : affichage différent selon le rôle + clic pour afficher l’intervention.
-- ✅ **Sélecteurs intelligents** : seuls les chauffagistes apparaissent pour l’assignation dans les interventions.
-- ✅ **Remarque chauffagiste** : chaque chauffagiste peut ajouter une remarque à ses interventions uniquement.
-- ✅ **Sécurité renforcée** : vérifications d’accès sur toutes les routes sensibles.
+## Features
 
----
+### User Management
 
-## Rôles & restrictions
+- Create, update, and manage user accounts.
+- Assign administrator, secretary, or technician roles.
+- Provide dedicated dashboards based on user permissions.
+- Restrict access to administrative features.
 
-| Rôle          | Droits                                                                 |
-|---------------|------------------------------------------------------------------------|
-| **Admin**      | Accès complet à tous les modules (utilisateurs, stocks, véhicules...) |
-| **Secrétaire** | Accès complet à tous les modules **mais pas aux utilisateurs** |
-| **Chauffagiste** | Accède uniquement à ses interventions et peut y ajouter des remarques |
+### Intervention Management
 
----
+- Create, view, update, and manage service interventions.
+- Assign technicians and vehicles to interventions.
+- Associate spare parts with service interventions.
+- Allow technicians to add notes to their assigned interventions.
+- Prevent conflicting technician or vehicle assignments at the same date and time.
 
-## Installation
+### Scheduling & Calendar
 
-### Prérequis :
-- PHP 8.x
+- Dynamic intervention calendars powered by FullCalendar.
+- Role-specific calendar views.
+- Access intervention details directly from calendar events.
+- Manage technician assignments and intervention planning.
+
+### Inventory & Vehicle Management
+
+- Create, view, update, and delete spare parts and inventory records.
+- Manage company vehicles.
+- Associate vehicles and resources with interventions.
+
+### Security & Access Control
+
+- User authentication.
+- Role-based authorization.
+- Protected routes and controllers.
+- Restricted access to sensitive operations.
+- Password hashing through Symfony Security.
+
+## User Roles
+
+| Role | Permissions |
+|------|-------------|
+| Administrator | Full access to users, interventions, inventory, vehicles, and scheduling |
+| Secretary | Access to operational modules, excluding user administration |
+| Technician | Access to assigned interventions and ability to add notes |
+
+## Tech Stack
+
+| Category | Technologies |
+|----------|--------------|
+| Backend | PHP 8.2+, Symfony 7.1 |
+| Frontend | Twig, JavaScript, CSS |
+| Database | PostgreSQL |
+| ORM | Doctrine ORM |
+| Scheduling | FullCalendar |
+| Asset Management | Symfony AssetMapper, Stimulus, UX Turbo |
+| Dependency Management | Composer |
+| Development Tools | PhpStorm, Git |
+
+## Getting Started
+
+### Prerequisites
+
+Make sure the following tools are installed:
+
+- PHP 8.2 or higher
 - Composer
-- Symfony 7.x
-- Base de données PostgreSQL ou MySQL
+- PostgreSQL
+- Symfony CLI (recommended)
+- Required PHP extensions for Symfony and Doctrine
 
-### Étapes :
-### 1. Clonez le projet
+### Installation
+
+**1. Clone the repository**
+
 ```bash
-git clone https://gitea.btssio-poitiers.fr/sermandm/HegreEtConfort.git
-cd HegreEtConfort
+git clone git@github.com:Maxiser00/heating-service-management.git
+cd heating-service-management
 ```
-### 2. Installez les dépendances
+
+**2. Install PHP dependencies**
+
 ```bash
 composer install
 ```
-### 3. Créez la base de données
+
+**3. Configure environment variables**
+
+Create a `.env.local` file in the project root.
+
+Example configuration:
+
+```dotenv
+APP_ENV=dev
+APP_SECRET=REPLACE_WITH_YOUR_OWN_RANDOM_SECRET
+DATABASE_URL="postgresql://user:password@127.0.0.1:5432/heating_service?serverVersion=16&charset=utf8"
+```
+
+Replace the example credentials and PostgreSQL version with your local configuration.
+
+Do not commit `.env.local` or any production credentials.
+
+**4. Create the database**
+
 ```bash
 php bin/console doctrine:database:create
 ```
-### 4. Appliquez les migrations
+
+**5. Run database migrations**
+
 ```bash
 php bin/console doctrine:migrations:migrate
 ```
 
-### 5. Créez un utilisateur admin (exemple PostgreSQL) :
-```sql
-INSERT INTO "HegreEtConfort".public.utilisateur (
-  id, email, first_name, last_name, birth_date, phone, roles, password
-)
-VALUES (
-  1000, 'admin@admin.admin', 'admin', 'admin', '2025-04-10', '0000000000',
-  '["ROLE_ADMIN"]',
-  '$2y$13$4jqoZVgncgDJ6oPFDswZeeiVmt9TF2AC.xoBwyyrrbNl5Xz8r.50e'
-);
-```
+**6. Start the development server**
 
-### 6. Démarrez le serveur Symfony :
 ```bash
 symfony server:start
 ```
 
-➡️ Accédez ensuite à l’application : [http://localhost:8000](http://localhost:8000)
+Open the local URL provided by Symfony CLI.
 
----
+### Initial Administrator Setup
 
-## Technologies utilisées
-- Symfony 7.x
-- Doctrine ORM
-- Twig
-- PHP 8.x
-- FullCalendar.js
-- PostgreSQL (ou MySQL selon config)
+An administrator account is required to access management features.
 
----
+The initial account creation procedure has not yet been documented for this repository.
 
-## Auteur
-Développé dans le cadre du BTS SIO - D'Hegre Et Confort 
-- Maxim SERMAND
-- Alyssa ALLARD
-- Giovanny BRUNET
-- Lucas RAGUENEAU
+Do not deploy the application with predefined or publicly known administrator credentials.
+
+## Screenshots
+
+Screenshots of the application interface, dashboards, intervention management, and scheduling features will be added later.
+
+## Project Background
+
+This application was developed as a collaborative academic project during the **BTS Services Informatiques aux Organisations (SIO), option Solutions Logicielles et Applications Métier (SLAM)**.
+
+The project provided practical experience in:
+
+- Full-stack web development with Symfony.
+- Relational database modeling and management.
+- Authentication and role-based access control.
+- Business-oriented application development.
+- Collaborative development using Git.
+- Interface design and dynamic scheduling.
+
+## Contributors
+
+This project was developed collaboratively by four contributors:
+
+- **[Maxiser00](https://github.com/Maxiser00)** — Project contributor and repository maintainer.
+- **Giovanny BRUNET** — Project contributor.
+- **Contributor 01** — Project contributor.
+- **Contributor 02** — Project contributor.
+
+The original development history is preserved separately.
+
+This repository is intended as a portfolio presentation of the collaborative project. The new Git history does not represent the original distribution of contributions.
+
+## Project Status
+
+**Academic project — development completed.**
+
+The application is preserved as a portfolio project and may receive documentation updates, maintenance improvements, and technical enhancements.
+
+## License
+
+No open-source license is currently granted.
+
+The project was developed collaboratively. Publication, distribution, and reuse of the source code remain subject to the rights of its contributors.
