@@ -45,7 +45,7 @@ class Intervention
     #[ORM\ManyToOne(inversedBy: 'intervention')]
     private ?Vehicle $vehicle = null;
 
-    #[ORM\ManyToMany(targetEntity: Stock::class)]
+    #[ORM\ManyToMany(targetEntity: Stock::class, inversedBy: 'interventions')]
     #[ORM\JoinTable(name: "intervention_stock")]
     private Collection $stocks;
 

@@ -43,8 +43,9 @@ class UserType extends AbstractType
             ])
             ->add('plainPassword', PasswordType::class, [
                 'mapped' => false,
-                'required' => true,
+                'required' => $options['password_required'],
                 'label' => 'Mot de passe',
+                'empty_data' => '',
             ])
         ;
     }
@@ -53,6 +54,9 @@ class UserType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Utilisateur::class,
+            'password_required' => true,
         ]);
+
+        $resolver->setAllowedTypes('password_required', 'bool');
     }
 }

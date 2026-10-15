@@ -45,7 +45,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Intervention::class)]
     private Collection $interventions;
 
-    #[ORM\ManyToMany(targetEntity: Skill::class)]
+    #[ORM\ManyToMany(targetEntity: Skill::class, inversedBy: 'users')]
     #[ORM\JoinTable(name: "user_skill")]
     private Collection $skills;
 

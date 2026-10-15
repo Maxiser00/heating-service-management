@@ -62,3 +62,6 @@ psalm.cache
 
 # Translations
 /translations/*.catalogue.php
+
+# Downloaded JavaScript dependencies (Symfony AssetMapper)
+/assets/vendor/
