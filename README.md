@@ -1,57 +1,55 @@
 
 # Heating Service Management System
 
-A web application designed to centralize and streamline daily operations in a heating and maintenance services company.
+A web application designed to centralize and simplify the daily operations of a heating and maintenance services company.
 
 Originally developed as a collaborative academic project during the **BTS SIO SLAM** program, this application provides tools for managing service interventions, employees, schedules, spare parts, and company vehicles.
 
-The system features role-based access control and dedicated interfaces for administrators, secretaries, and technicians.
+The application features role-based access control with dedicated interfaces for administrators, secretaries, and heating technicians.
 
 ## Features
 
 ### User Management
-
-- Create, update, and manage user accounts.
+- Create, view, update, and delete user accounts.
 - Assign administrator, secretary, or technician roles.
-- Provide dedicated dashboards based on user permissions.
-- Restrict access to administrative features.
+- Access dedicated dashboards based on user permissions.
+- Securely hash user passwords.
+- Update user information without requiring a password change.
 
 ### Intervention Management
-
-- Create, view, update, and manage service interventions.
+- Create, view, update, and delete service interventions.
 - Assign technicians and vehicles to interventions.
-- Associate spare parts with service interventions.
-- Allow technicians to add notes to their assigned interventions.
-- Prevent conflicting technician or vehicle assignments at the same date and time.
+- Associate spare parts with interventions.
+- Manage intervention statuses and descriptions.
+- Allow technicians to view their assigned interventions and add notes.
+- Prevent identical-time assignments for the same technician or vehicle.
 
 ### Scheduling & Calendar
-
-- Dynamic intervention calendars powered by FullCalendar.
+- Interactive intervention calendars powered by FullCalendar.
 - Role-specific calendar views.
 - Access intervention details directly from calendar events.
-- Manage technician assignments and intervention planning.
+- Visualize upcoming and completed interventions.
 
 ### Inventory & Vehicle Management
-
-- Create, view, update, and delete spare parts and inventory records.
+- Manage spare parts and inventory records.
 - Manage company vehicles.
-- Associate vehicles and resources with interventions.
+- Associate vehicles and spare parts with interventions.
+- Manage fault categories and technician skills.
 
 ### Security & Access Control
-
-- User authentication.
+- User authentication through Symfony Security.
 - Role-based authorization.
-- Protected routes and controllers.
-- Restricted access to sensitive operations.
-- Password hashing through Symfony Security.
+- Protected controllers and routes.
+- Restricted access to administrative operations.
+- CSRF protection for supported forms and deletion operations.
 
 ## User Roles
 
 | Role | Permissions |
 |------|-------------|
-| Administrator | Full access to users, interventions, inventory, vehicles, and scheduling |
-| Secretary | Access to operational modules, excluding user administration |
-| Technician | Access to assigned interventions and ability to add notes |
+| Administrator | Manage users, interventions, inventory, vehicles, faults, skills, and scheduling |
+| Secretary | Manage operational resources and interventions without user administration privileges |
+| Technician | View assigned interventions, consult their schedule, and add intervention notes |
 
 ## Tech Stack
 
@@ -61,10 +59,10 @@ The system features role-based access control and dedicated interfaces for admin
 | Frontend | Twig, JavaScript, CSS |
 | Database | PostgreSQL |
 | ORM | Doctrine ORM |
-| Scheduling | FullCalendar |
+| Calendar | FullCalendar |
 | Asset Management | Symfony AssetMapper, Stimulus, UX Turbo |
 | Dependency Management | Composer |
-| Development Tools | PhpStorm, Git |
+| Version Control | Git, GitHub |
 
 ## Getting Started
 
@@ -83,7 +81,7 @@ Make sure the following tools are installed:
 **1. Clone the repository**
 
 ```bash
-git clone git@github.com:Maxiser00/heating-service-management.git
+git clone https://github.com/Maxiser00/heating-service-management.git
 cd heating-service-management
 ```
 
@@ -93,11 +91,15 @@ cd heating-service-management
 composer install
 ```
 
-**3. Configure environment variables**
+**3. Install frontend dependencies**
 
-Create a `.env.local` file in the project root.
+```bash
+php bin/console importmap:install
+```
 
-Example configuration:
+**4. Configure environment variables**
+
+Create a `.env.local` file in the project root:
 
 ```dotenv
 APP_ENV=dev
@@ -105,76 +107,163 @@ APP_SECRET=REPLACE_WITH_YOUR_OWN_RANDOM_SECRET
 DATABASE_URL="postgresql://user:password@127.0.0.1:5432/heating_service?serverVersion=16&charset=utf8"
 ```
 
-Replace the example credentials and PostgreSQL version with your local configuration.
+Replace the database credentials, PostgreSQL version, and application secret with values appropriate for your local environment.
 
-Do not commit `.env.local` or any production credentials.
+Never commit `.env.local` or production credentials.
 
-**4. Create the database**
+**5. Create the database**
 
 ```bash
 php bin/console doctrine:database:create
 ```
 
-**5. Run database migrations**
+**6. Run database migrations**
 
 ```bash
-php bin/console doctrine:migrations:migrate
+php bin/console doctrine:migrations:migrate --no-interaction
 ```
 
-**6. Start the development server**
+**7. Start the development server**
 
 ```bash
 symfony server:start
 ```
 
-Open the local URL provided by Symfony CLI.
+Open the local URL displayed by Symfony CLI.
 
-### Initial Administrator Setup
+## Demo Database
 
-An administrator account is required to access management features.
+A fictional dataset is included to make the application easier to explore and evaluate.
 
-The initial account creation procedure has not yet been documented for this repository.
+The demonstration data includes:
 
-Do not deploy the application with predefined or publicly known administrator credentials.
+- 1 administrator
+- 2 secretaries
+- 4 heating technicians
+- 5 technician skills
+- 5 fault categories
+- 4 company vehicles
+- 8 spare part references
+- 12 service interventions
+- Technician-skill and intervention-stock associations
+
+### Import Demo Data
+
+After creating the database and running the migrations, execute:
+
+```bash
+php bin/console app:import-demo --force
+```
+
+The command is intended exclusively for a fresh, disposable development database.
+
+**Warning:** Do not run the demonstration import against a production database or a database containing important information.
+
+### Demo Accounts
+
+| Role | Email |
+|------|-------|
+| Administrator | admin@demo.local |
+| Secretary | secretaire1@demo.local |
+| Secretary | secretaire2@demo.local |
+| Technician | chauffagiste1@demo.local |
+| Technician | chauffagiste2@demo.local |
+| Technician | chauffagiste3@demo.local |
+| Technician | chauffagiste4@demo.local |
+
+All demonstration accounts are intended for local testing only.
+
+The SQL seed contains password hashes. Use the corresponding demonstration credentials configured for your local dataset.
+
+Never reuse demonstration credentials in a public deployment.
+
+## Administrator Setup
+
+An administrator account can also be created manually using the Symfony console command:
+
+```bash
+php bin/console app:create-admin
+```
+
+The command interactively requests:
+
+- Email address
+- First name
+- Last name
+- Birth date
+- Phone number
+- Password
+
+Passwords are entered without being displayed and are securely hashed using Symfony's password hasher.
+
+This command is particularly useful when setting up the application without importing demonstration data.
+
+## Project Structure
+
+```text
+assets/                  Frontend JavaScript and CSS
+config/                  Symfony configuration
+migrations/              Doctrine database migrations
+public/                  Public application entry point
+src/
+  Command/               Console commands
+  Controller/            Application controllers
+  Entity/                Doctrine entities
+  Form/                  Symfony forms
+templates/               Twig templates
+heating_demo_seed.sql    Fictional demonstration dataset
+importmap.php            Frontend dependency configuration
+composer.json            PHP dependency configuration
+```
 
 ## Screenshots
 
-Screenshots of the application interface, dashboards, intervention management, and scheduling features will be added later.
+Screenshots of the application will be added to illustrate:
+
+- Authentication
+- Administrator dashboard
+- Secretary dashboard
+- Technician dashboard
+- Intervention management
+- Interactive calendar
+- Inventory and vehicle management
 
 ## Project Background
 
-This application was developed as a collaborative academic project during the **BTS Services Informatiques aux Organisations (SIO), option Solutions Logicielles et Applications Métier (SLAM)**.
+This application was developed collaboratively as part of the **BTS Services Informatiques aux Organisations (SIO), option Solutions Logicielles et Applications Métier (SLAM)**.
 
 The project provided practical experience in:
 
-- Full-stack web development with Symfony.
-- Relational database modeling and management.
-- Authentication and role-based access control.
-- Business-oriented application development.
-- Collaborative development using Git.
-- Interface design and dynamic scheduling.
+- Full-stack web development with Symfony
+- Relational database design and management
+- Authentication and role-based access control
+- Business-oriented application development
+- Collaborative development using Git
+- Interface design and dynamic scheduling
 
 ## Contributors
 
 This project was developed collaboratively by four contributors:
 
-- **[Maxiser00](https://github.com/Maxiser00)** — Project contributor and repository maintainer.
-- **Giovanny BRUNET** — Project contributor.
-- **Contributor 01** — Project contributor.
-- **Contributor 02** — Project contributor.
+- **[Maxiser00](https://github.com/Maxiser00)** — Project contributor and repository maintainer
+- **Giovanny BRUNET** — Project contributor
+- **Contributor 01** — Project contributor
+- **Contributor 02** — Project contributor
 
 The original development history is preserved separately.
 
-This repository is intended as a portfolio presentation of the collaborative project. The new Git history does not represent the original distribution of contributions.
+This repository serves as a portfolio presentation of the collaborative project. Its current Git history does not represent the original distribution of contributions.
 
 ## Project Status
 
-**Academic project — development completed.**
+**Academic project — initial development completed.**
 
-The application is preserved as a portfolio project and may receive documentation updates, maintenance improvements, and technical enhancements.
+The application is maintained as a portfolio project and may receive documentation updates, bug fixes, and technical improvements.
+
+The demonstration environment has been configured and role-based authentication has been tested. Comprehensive automated and functional testing has not yet been completed.
 
 ## License
 
 No open-source license is currently granted.
 
-The project was developed collaboratively. Publication, distribution, and reuse of the source code remain subject to the rights of its contributors.
+This project was developed collaboratively. Publication, distribution, and reuse of the source code remain subject to the rights of its contributors.
